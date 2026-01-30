@@ -14,9 +14,9 @@
 <!-- Preload images -->
 <link rel="preload" as="image" href="gift-box.jpg">
 <link rel="preload" as="image" href="rose.jpg">
+<link rel="preload" as="image" href="rose-1.jpg">
 
 <style>
-/* ===== BASE ===== */
 html,body{
   margin:0;
   padding:0;
@@ -60,7 +60,7 @@ body{
   text-align:center;
 }
 
-/* LOCK OVERLAY */
+/* LOCK overlay */
 .locked{
   position:relative;
 }
@@ -80,7 +80,7 @@ body{
   z-index:5;
 }
 
-/* TEXT */
+/* Text */
 h1{
   font-family:'Dancing Script',cursive;
   font-size:38px;
@@ -98,7 +98,7 @@ h1{
 }
 
 /* Video */
-.video-box iframe{
+.video iframe{
   width:100%;
   height:200px;
   border-radius:16px;
@@ -119,6 +119,8 @@ img{
   width:100%;
   max-width:360px;
   border-radius:18px;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+  margin-top:15px;
 }
 
 /* Footer */
@@ -149,44 +151,49 @@ footer a{
   <div id="age"></div>
 
   <!-- VIDEO LOCKED -->
-  <div class="video-box locked">
+  <div class="video locked">
     <iframe src="https://streamable.com/e/tsgee9"></iframe>
   </div>
 
   <!-- GIFT LOCKED -->
-  <div class="locked">
+  <div class="locked" style="margin-top:25px;">
     <div class="gift-box">🎁</div>
     <div class="open-text">Open Gift Box</div>
   </div>
 
-  <!-- ROSE LOCKED -->
+  <!-- ROSE 1 LOCKED -->
   <div class="locked" style="margin-top:25px;">
     <img src="rose.jpg">
   </div>
 
+  <!-- ROSE 2 LOCKED -->
+  <div class="locked" style="margin-top:25px;">
+    <img src="rose-1.jpg">
+  </div>
+
+  <!-- FOOTER LOCKED -->
   <footer class="locked" style="margin-top:20px;">
-    Developed by 
-    <a href="#">Saiful</a> 💖
+    Developed by <a href="#">Saiful</a> 💖
   </footer>
 
 </div>
 
 <script>
-const unlockTime = new Date("2026-02-12T00:00:00"); // adjust year if needed
-
+// ===== DATE SETUP =====
+const unlockTime = new Date("2026-02-12T00:00:00"); // 12 Feb, 12:00 AM
 const now = new Date();
 
 // AGE
 const birth = new Date("2008-02-12");
 let age = now.getFullYear() - birth.getFullYear();
 if(now < new Date(now.getFullYear(),1,12)) age--;
-document.getElementById("age").innerHTML="Turning "+age+" ✨";
+document.getElementById("age").innerHTML = "Turning " + age + " ✨";
 
 // COUNTDOWN
 setInterval(()=>{
   let diff = unlockTime - new Date();
   if(diff <= 0){
-    location.reload();
+    location.reload(); // auto unlock by reload
   }
   let d=Math.floor(diff/86400000);
   let h=Math.floor(diff/3600000)%24;
